@@ -26,9 +26,9 @@ class RetrieveUpdateDeleteDestinations(generics.RetrieveUpdateDestroyAPIView):
 
 class ListAvailableDates(generics.ListCreateAPIView):
     queryset = models.AvailableDates.objects.all()
-    serializer_class = serializers.AvailableDates
+    serializer_class = serializers.AvailableDatesSerializer
 
 
 class RetrieveUpdateAvailableDates(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.AvailableDates.objects.all()
-    serializer_class = serializers.AvailableDates
+    serializer_class = serializers.AvailableDatesSerializer

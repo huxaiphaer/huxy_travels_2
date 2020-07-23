@@ -14,9 +14,10 @@ class DestinationSerializer(serializers.ModelSerializer):
         )
 
         model = models.Destinations
+        read_only_fields = ('tour_package',)
 
 
-class AvailableDates(serializers.ModelSerializer):
+class AvailableDatesSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
             'id',
@@ -25,11 +26,12 @@ class AvailableDates(serializers.ModelSerializer):
         )
 
         model = models.AvailableDates
+        read_only_fields = ('tour_package',)
 
 
 class TourPackageSerializer(serializers.ModelSerializer):
-    destinations = DestinationSerializer(many=True, read_only=True)
-    available_dates = AvailableDates(many=True, read_only=True)
+    destinations = DestinationSerializer(many=True)
+    available_dates = AvailableDatesSerializer(many=True)
 
     class Meta:
         fields = (
@@ -44,3 +46,22 @@ class TourPackageSerializer(serializers.ModelSerializer):
         )
 
         model = models.TourPackages
+
+    def create(self, validated_data):
+        """
+        :param validated_data:
+        :return: one create tour package.
+        """
+
+        destinations_data = validated_data.pop("destinations")
+        dates_data = validated_data.pop("available_dates")
+        tour_package = models.TourPackages.objects.create(**validated_data)
+
+        for dest_data in destinations_data:
+            models.Destinations.objects.create(**dest_data, tour_package=tour_package)
+
+        for dd in dates_data:
+            models.AvailableDates.objects.create(**dd, tour_package=tour_package,)
+
+        return tour_package
+
