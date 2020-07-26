@@ -5,5 +5,6 @@ from django.conf.urls import url, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^api/v1/tour/', include('tourpackages.urls'))
+    url(r'^api/v1/tour/', include('tourpackages.urls')),
+    url(r'^api/v1/user/', include('accounts.urls'))
 ]
