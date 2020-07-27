@@ -23,3 +23,7 @@ class AvailableDates(models.Model):
     date_available = models.DateField()
     tour_package = models.ForeignKey(TourPackages, related_name='available_dates', on_delete=models.CASCADE)
 
+
+class Booking(models.Model):
+    tour_package = models.ForeignKey(TourPackages, related_name='booking_tour', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
