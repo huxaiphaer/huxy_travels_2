@@ -34,6 +34,22 @@ class AvailableDatesSerializer(serializers.ModelSerializer):
         read_only_fields = ('tour_package',)
 
 
+class BookingSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(required=False)
+
+    class Meta:
+        fields = (
+            'id',
+            'user',
+            'tour_package'
+        )
+
+    def update(self, instance, validated_data):
+
+        print("instance ---> ", instance)
+        print("validated data ---> ", validated_data)
+
+
 class TourPackageSerializer(serializers.ModelSerializer):
     destinations = DestinationSerializer(many=True)
     available_dates = AvailableDatesSerializer(many=True)

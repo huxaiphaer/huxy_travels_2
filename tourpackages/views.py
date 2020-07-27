@@ -5,6 +5,7 @@ from . import serializers
 
 
 class ListTourPackages(generics.ListCreateAPIView):
+    authentication_classes = []
     queryset = models.TourPackages.objects.all()
     serializer_class = serializers.TourPackageSerializer
 
@@ -32,3 +33,8 @@ class ListAvailableDates(generics.ListCreateAPIView):
 class RetrieveUpdateAvailableDates(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.AvailableDates.objects.all()
     serializer_class = serializers.AvailableDatesSerializer
+
+class Booking(generics.UpdateAPIView):
+    # authentication_classes = []
+    queryset = models.Booking.objects.all()
+    serializer_class = serializers.BookingSerializer
