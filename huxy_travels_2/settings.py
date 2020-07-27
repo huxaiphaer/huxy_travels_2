@@ -35,9 +35,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+
+    'users',
     'tourpackages',
-    'accounts',
-    'rest_framework'
+
 ]
 
 MIDDLEWARE = [
@@ -120,11 +122,9 @@ STATIC_URL = '/static/'
 # REST Framework
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework_simplejwt.authentication.JWTAuthentication'
+        # 'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 5
 }
-
-AUTH_USER_MODEL = 'accounts.User'
-REFRESH_TOKEN_SECRET = 'tours'
