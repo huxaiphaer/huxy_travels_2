@@ -19,6 +19,9 @@ def make_weather_request():
     Make request to the url
     """
 
+    """first clear table"""
+    Weather.objects.all().delete()
+
     city_res = req.get(cities_url)
 
     for i in city_res.json():
