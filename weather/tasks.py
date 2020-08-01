@@ -10,7 +10,7 @@ from weather.weather_url import base_url, weather_api_key, cities_url
 
 
 @periodic_task(
-    run_every=(crontab(minute='*/1')),
+    run_every=(crontab(minute='*/20')),
     name="make_weather_request",
     ignore_result=True
 )

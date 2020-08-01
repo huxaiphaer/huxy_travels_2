@@ -1,7 +1,8 @@
 from rest_framework import generics
 from rest_framework.generics import get_object_or_404
-from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.status import HTTP_404_NOT_FOUND
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from . import models
@@ -16,31 +17,43 @@ class ListTourPackages(generics.ListCreateAPIView):
 
 
 class RetrieveUpdateDeleteTourPackages(generics.RetrieveUpdateDestroyAPIView):
+    authentication_classes = (JWTAuthentication,)
+    permission_classes = (IsAuthenticated,)
     queryset = models.TourPackages.objects.all()
     serializer_class = serializers.TourPackageSerializer
 
 
 class ListDestinations(generics.ListCreateAPIView):
+    authentication_classes = (JWTAuthentication,)
+    permission_classes = (IsAuthenticated,)
     queryset = models.Destinations.objects.all()
     serializer_class = serializers.DestinationSerializer
 
 
 class RetrieveUpdateDeleteDestinations(generics.RetrieveUpdateDestroyAPIView):
+    authentication_classes = (JWTAuthentication,)
+    permission_classes = (IsAuthenticated,)
     queryset = models.Destinations.objects.all()
     serializer_class = serializers.DestinationSerializer
 
 
 class ListAvailableDates(generics.ListCreateAPIView):
+    authentication_classes = (JWTAuthentication,)
+    permission_classes = (IsAuthenticated,)
     queryset = models.AvailableDates.objects.all()
     serializer_class = serializers.AvailableDatesSerializer
 
 
 class RetrieveUpdateAvailableDates(generics.RetrieveUpdateDestroyAPIView):
+    authentication_classes = (JWTAuthentication,)
+    permission_classes = (IsAuthenticated,)
     queryset = models.AvailableDates.objects.all()
     serializer_class = serializers.AvailableDatesSerializer
 
 
 class Booking(generics.RetrieveUpdateDestroyAPIView):
+    authentication_classes = (JWTAuthentication,)
+    permission_classes = (IsAuthenticated,)
     queryset = models.Booking.objects.all()
     serializer_class = serializers.BookingSerializer
 
@@ -51,6 +64,9 @@ class Booking(generics.RetrieveUpdateDestroyAPIView):
         )
 
         current_capacity = tour.capacity
-        tour.capacity = current_capacity -1
+        tour.capacity = current_capacity - 1
+
+        if tour.capacity <= 0:
+            return Response(status=HTTP_404_NOT_FOUND, data={"message", "Sorry, no more seats"})
         tour.save()
         return Response({"message": "Booking made successfully"})
