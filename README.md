@@ -1,4 +1,5 @@
-
+[![Build Status](https://travis-ci.com/huxaiphaer/huxy_travels_2.svg?branch=master)](https://travis-ci.com/huxaiphaer/huxy_travels_2)
+[![codecov](https://codecov.io/gh/huxaiphaer/huxy_travels_2/branch/master/graph/badge.svg)](https://codecov.io/gh/huxaiphaer/huxy_travels_2)
 # Huxy Travels
 
 The number one stop experience for having fascinating tours.

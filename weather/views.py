@@ -6,7 +6,7 @@ from weather.models import Weather
 from weather.serializers import WeatherSerializer
 
 
-class WeatherView(generics.ListAPIView):
+class WeatherView(generics.ListCreateAPIView):
     authentication_classes = (JWTAuthentication,)
     permission_classes = (IsAuthenticated,)
     queryset = Weather.objects.all()

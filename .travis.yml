@@ -1,0 +1,28 @@
+language: python
+
+python:
+  - "3.6"
+
+addons:
+  postgresql: "9.4"
+
+services:
+  - postgresql
+  - rabbitmq
+
+install:
+  - pip install -r requirements.txt
+  - pip install pytest pytest-cov
+
+before_script:
+  - psql -c "create database huxy_tours;" -U postgres
+  - python manage.py makemigrations
+  - python manage.py migrate
+  - python manage.py migrate --run-syncdb
+
+
+script:
+  - nosetests --with-coverage
+
+after_success:
+  bash <(curl -s https://codecov.io/bash)
