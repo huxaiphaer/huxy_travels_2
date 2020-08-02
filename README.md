@@ -2,7 +2,7 @@
 [![codecov](https://codecov.io/gh/huxaiphaer/huxy_travels_2/branch/master/graph/badge.svg)](https://codecov.io/gh/huxaiphaer/huxy_travels_2)
 # Huxy Travels
 
-The number one stop experience for having fascinating tours.
+The number one stop experience for having fascinating tours, try us today.
 
 ### Requirements for setting up the project.
 1. Python3. 
@@ -27,22 +27,21 @@ $ https://github.com/huxaiphaer/huxy_travels_2.git
 2 . Add the following variables in your Environment Variables permanently:
 
 ```buildoutcfg
-CELERY_BROKER_URL=redis://redis:6379/0
-DB_NAME=test
+CELERY_BROKER_URL=redis://localhost:6379/0
+DB_NAME=huxy_tours
 DEBUG_CONFIG=false
-DB_USER=test
-DB_PASSWORD=test
-DB_HOST=test
-SECRET_KEY=huxy
-DB_PORT=5432
-DB_TEST=test
+DB_USER=your_username
+DB_PASSWORD=your_password
+DB_HOST=localhost
+SECRET_KEY=any_secret_key
+DB_PORT=port_number_for_db
+DB_TEST=test_db_name
 WEATHER_BASE_URL=api.openweathermap.org/data/2.5/forecast
 WEATHER_API_KEY=1d4ce67223a53a013fc03ead36137396
 CITIES_URL=https://raw.githubusercontent.com/huxaiphaer/travel_huxy/master/app/static/data/current_city_list.json
-DB_TEST=tests
 ```
 
-After, setting up the environment variables add create a Postgres Database called `huxy_tours`, followed by running SQLAlchemy migrations with the commands 
+After, setting up the environment variables add create a Postgres Database called `huxy_tours`, followed by running  migrations with the commands 
 below to create all the necessary tables :
 
 
@@ -93,7 +92,7 @@ variables a permanently saved._
   `$ python manage.py runserver`
 
 Then, Viola you easily navigate to the server URL 
-`http://120.0.0.1:8000` 
+`http://120.0.0.1:8000` or `http://localhost:8000`
 
 
 ## Running with Docker.
@@ -102,7 +101,7 @@ The alternative way of running this project is by using Docker.
 
 #### Requirements.
 
-- Ensure that you have installed docker on your machine.
+- Ensure that you have installed docker on your machine and you've started it.
 
 After, installing , then run the following command in the root folder of the 
 project to spin the container.
@@ -116,7 +115,7 @@ project to spin the container.
 If the command is successfully done , it shows the `celery` logs 
 of the beats.
 
-To access, the application use `http://0.0.0.0:5005` 
+To access, the application use `http://0.0.0.0:5005` (Ensure that all containers or services are up and running)
 
  #### Endpoints to create a user account and login into the application
 
@@ -156,7 +155,7 @@ Running tests of the project :
 $ nosetests
 ```
 
-Running tests with cover``age :
+Running tests with coverage :
 
 ```python3
 $ nosetests --with-coverage
