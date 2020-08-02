@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from tourpackages import models
+from apps.tourpackages import models
 
 admin.site.register(models.TourPackages)
 admin.site.register(models.AvailableDates)

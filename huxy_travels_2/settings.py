@@ -18,9 +18,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'users',
-    'tourpackages',
-    'weather'
+    'apps.users',
+    'apps.tourpackages',
+    'apps.weather'
 
 ]
 

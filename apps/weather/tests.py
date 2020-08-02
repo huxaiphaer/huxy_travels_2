@@ -5,8 +5,8 @@ from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APIClient
 
-from weather.models import Weather
-from weather.test_weather_data import TestWeatherData
+from apps.weather.models import Weather
+from apps.weather.test_weather_data import TestWeatherData
 
 
 class Test(TestCase, TestWeatherData):
