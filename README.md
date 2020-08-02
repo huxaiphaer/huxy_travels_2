@@ -6,7 +6,7 @@ The number one stop experience for having fascinating tours.
 
 ### Requirements for setting up the project.
 1. Python3. 
-2. Flask
+2. Django
 3. Virtualenv. 
 4. Redis. 
 You need to install redis on your machine, then afterwards you activate it.
@@ -21,21 +21,25 @@ celery is already in the `requirements.txt` file.
 1 . First clone this repository 
 
 ```
-$ git clone https://github.com/huxaiphaer/travel_huxy.git
+$ https://github.com/huxaiphaer/huxy_travels_2.git
 ```
 
 2 . Add the following variables in your Environment Variables permanently:
 
 ```buildoutcfg
-FLASK_APP=run.py
-DATABASE_URL=postgresql://postgres:your_db_password@localhost:5432/huxy_tours
-REDIS_URL=redis://localhost:6379/0
+CELERY_BROKER_URL=redis://redis:6379/0
+DB_NAME=test
+DEBUG_CONFIG=false
+DB_USER=test
+DB_PASSWORD=test
+DB_HOST=test
+SECRET_KEY=huxy
+DB_PORT=5432
+DB_TEST=test
+WEATHER_BASE_URL=api.openweathermap.org/data/2.5/forecast
 WEATHER_API_KEY=1d4ce67223a53a013fc03ead36137396
-SECRET_KEY=anything_you_put_here
-APPLICATION_HOST=0.0.0.0
-APPLICATION_PORT=5002
-APPLICATION_DEBUG=False
-
+CITIES_URL=https://raw.githubusercontent.com/huxaiphaer/travel_huxy/master/app/static/data/current_city_list.json
+DB_TEST=tests
 ```
 
 After, setting up the environment variables add create a Postgres Database called `huxy_tours`, followed by running SQLAlchemy migrations with the commands 
@@ -47,9 +51,9 @@ below to create all the necessary tables :
 as setting all the environment variables above.
 
 ```
-$ flask db init
-$ flask db migrate
-$ flask db upgrade
+$ python manage.py makemigrations
+$ python manage.py migrate
+$ python manage.py migrate --run-syncdb
 
 ```
 
@@ -70,12 +74,12 @@ $ pip3 install -r requirements.txt
 5. Activate celery to perform background tasks, open a new tab in the project directory.
 Run this first command :
 
-`$ celery -A app.tasks.weather_tasks.celery worker -l info`
+`$ celery -A huxy_travels_2 worker -l info`
 
 Then, after running the above command, create another tab in the terminal with the environment variables and run
 the command below :
 
-`$ celery -A app.tasks.weather_tasks.celery beat -l info`
+`$ celery -A huxy_travels_2 beat -l info`
 
 
 **HINT**:
@@ -86,10 +90,10 @@ variables a permanently saved._
 
 6. After, that, open another terminal and now run the entire project with the following command:
 
-  `$ python3 run.py`
+  `$ python manage.py runserver`
 
 Then, Viola you easily navigate to the server URL 
-`http://APPLICATION_HOST:APPLICATION_PORT` 
+`http://120.0.0.1:8000` 
 
 
 ## Running with Docker.
@@ -112,14 +116,14 @@ project to spin the container.
 If the command is successfully done , it shows the `celery` logs 
 of the beats.
 
-To access, the application use `http://APPLICATION_HOST:APPLICATION_PORT` 
+To access, the application use `http://0.0.0.0:5005` 
 
  #### Endpoints to create a user account and login into the application
 
 | HTTP Method   | End Point             | Action          |
 | ------------- | --------------------- |-----------------|
 | POST          | api/v1/register       |Create an account|
-| POST          | /api/v1/login         |Login user       |
+| POST          | /api/v1/auth/create   |Login user       |
 
 
 
@@ -127,14 +131,13 @@ To access, the application use `http://APPLICATION_HOST:APPLICATION_PORT`
 
 | HTTP Method   | End Point                                   | Action                         |
 | ------------- | ------------------------------------------  |--------------------------------|
-| POST          | /api/v1/tourpackages                        |Creates tour packages.          |
-| GET           | /api/v1/tourpackages                        |Get list of tour packages.      |
-| GET           |/api/v1/tourpackages/<first_date>/<end_date> |Get tourpackages by date        | 
-| GET           | /api/v1/tourpackages/<tour_id>              |Get tour package by ID.         |
-| PUT           | /api/v1/tourpackages/<tour_id>              |Update tour package by ID.      | 
-| DELETE        | api/v1/tourpackages/<tour_id>               |Delete tour package by ID       |
-| POST          | /api/v1/booking/<tour_id>                   |Make a booking request          |
-| DELETE        | /api/v1/booking/<tour_id>                   |Delete a booking request        |
+| POST          | /api/v1/tour                                |Creates tour packages.          |
+| GET           | /api/v1/tour                                |Get list of tour packages.      |
+| GET           | /api/v1/tour/<tour_id>                      |Get tour package by ID.         |
+| PUT           | /api/v1/tour/<tour_id>                      |Update tour package by ID.      | 
+| DELETE        | api/v1/tour/<tour_id>                       |Delete tour package by ID       |
+| PUT           | /api/v1/tour/booking/<tour_id>              |Make a booking request          |
+| DELETE        | /api/v1/tour/booking/<tour_id>                   |Delete a booking request        |
 | GET           | /api/v1/weather/{lat}/{lon}                 |Get weather updates by location |
 |               |                                             |                                |
 

@@ -5,8 +5,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver']
+DEBUG = os.getenv('DEBUG_CONFIG')
+ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'localhost', 'testserver']
 
 # Application definition
 
