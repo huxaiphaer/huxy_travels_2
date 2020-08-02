@@ -122,8 +122,8 @@ To access, the application use `http://0.0.0.0:5005`
 
 | HTTP Method   | End Point             | Action          |
 | ------------- | --------------------- |-----------------|
-| POST          | api/v1/register       |Create an account|
-| POST          | /api/v1/auth/create   |Login user       |
+| POST          | /api/v1/auth/create   |Create an account|
+| POST          | /api/v1/login         |Login user       |
 
 
 
@@ -137,7 +137,7 @@ To access, the application use `http://0.0.0.0:5005`
 | PUT           | /api/v1/tour/<tour_id>                      |Update tour package by ID.      | 
 | DELETE        | api/v1/tour/<tour_id>                       |Delete tour package by ID       |
 | PUT           | /api/v1/tour/booking/<tour_id>              |Make a booking request          |
-| DELETE        | /api/v1/tour/booking/<tour_id>                   |Delete a booking request        |
+| DELETE        | /api/v1/tour/booking/<tour_id>              |Delete a booking request        |
 | GET           | /api/v1/weather/{lat}/{lon}                 |Get weather updates by location |
 |               |                                             |                                |
 
