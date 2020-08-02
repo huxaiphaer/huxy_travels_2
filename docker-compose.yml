@@ -2,7 +2,6 @@ version: "3.7"
 
 services:
 
-
   redis:
     container_name: redis_dev_container
     image: redis
@@ -33,6 +32,9 @@ services:
     depends_on:
       - redis
       - db
+
+    links:
+      - db:db
     ports:
       - '5005:5005'
     volumes:
@@ -43,7 +45,7 @@ services:
       - DEBUG_CONFIG=false
       - DB_USER=test
       - DB_PASSWORD=test
-      - DB_HOST=test
+      - DB_HOST=db
       - SECRET_KEY=huxy
       - DB_PORT=5432
       - DB_TEST=test
