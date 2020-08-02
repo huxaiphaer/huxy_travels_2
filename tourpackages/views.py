@@ -16,6 +16,17 @@ class ListTourPackages(generics.ListCreateAPIView):
     serializer_class = serializers.TourPackageSerializer
 
 
+class TourPackagesByDate(generics.ListAPIView):
+    authentication_classes = (JWTAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        first_date = self.kwargs['first_date']
+        last_date = self.kwargs['last_date']
+
+        return models.TourPackages.objects.filter(available_dates__date_available=first_date, available_dates=last_date)
+
+
 class RetrieveUpdateDeleteTourPackages(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = (JWTAuthentication,)
     permission_classes = (IsAuthenticated,)

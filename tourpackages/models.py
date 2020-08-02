@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
 
 class TourPackages(models.Model):
@@ -25,5 +26,6 @@ class AvailableDates(models.Model):
 
 
 class Booking(models.Model):
+    user = models.ForeignKey(get_user_model(), related_name='booking_user', on_delete=models.CASCADE)
     tour_package = models.ForeignKey(TourPackages, related_name='booking_tour', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)

@@ -134,11 +134,12 @@ To access, the application use `http://0.0.0.0:5005`
 | POST          | /api/v1/tour                                |Creates tour packages.          |
 | GET           | /api/v1/tour                                |Get list of tour packages.      |
 | GET           | /api/v1/tour/<tour_id>                      |Get tour package by ID.         |
+| GET           | /api/v1/tourpackages/<first_date>/<end_date>|Get tourpackages by date        |
 | PUT           | /api/v1/tour/<tour_id>                      |Update tour package by ID.      | 
 | DELETE        | api/v1/tour/<tour_id>                       |Delete tour package by ID       |
 | PUT           | /api/v1/tour/booking/<tour_id>              |Make a booking request          |
 | DELETE        | /api/v1/tour/booking/<tour_id>              |Delete a booking request        |
-| GET           | /api/v1/weather/{lat}/{lon}                 |Get weather updates by location |
+| GET           | /api/v1/weather_forecast/search/{lat}/{lon} |Get weather updates by location |
 |               |                                             |                                |
 
 
@@ -155,7 +156,7 @@ Running tests of the project :
 $ nosetests
 ```
 
-Running tests with coverage :
+Running tests with cover``age :
 
 ```python3
 $ nosetests --with-coverage

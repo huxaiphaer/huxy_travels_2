@@ -11,3 +11,16 @@ class WeatherView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = Weather.objects.all()
     serializer_class = WeatherSerializer
+
+
+class WeatherViewByLocation(generics.ListCreateAPIView):
+    authentication_classes = (JWTAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    queryset = Weather.objects.all()
+    serializer_class = WeatherSerializer
+
+    def get_queryset(self):
+        latitude = self.kwargs['lat']
+        longitude = self.kwargs['lon']
+
+        return Weather.objects.filter(latitude=latitude, longitude=longitude)
