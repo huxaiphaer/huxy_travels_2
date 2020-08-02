@@ -2,8 +2,8 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from weather.models import Weather
-from weather.serializers import WeatherSerializer
+from apps.weather.models import Weather
+from apps.weather.serializers import WeatherSerializer
 
 
 class WeatherView(generics.ListCreateAPIView):

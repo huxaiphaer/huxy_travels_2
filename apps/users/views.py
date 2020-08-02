@@ -1,7 +1,7 @@
 from rest_framework.generics import GenericAPIView
 from rest_framework.mixins import CreateModelMixin
 
-from users.serializer import AuthSerializer
+from apps.users.serializer import AuthSerializer
 
 
 class AuthCreateView(CreateModelMixin, GenericAPIView):

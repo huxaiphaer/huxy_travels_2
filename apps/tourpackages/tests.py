@@ -5,8 +5,8 @@ from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APIClient
 
-from tourpackages.models import TourPackages
-from tourpackages.test_tour_packages_data import TestTourPackagesData
+from apps.tourpackages.models import TourPackages
+from apps.tourpackages.test_tour_packages_data import TestTourPackagesData
 
 
 class Test(TestCase, TestTourPackagesData):

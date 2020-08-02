@@ -5,8 +5,8 @@ import requests as req
 from celery.schedules import crontab
 from celery.task import periodic_task
 
-from weather.models import Weather
-from weather.weather_url import base_url, weather_api_key, cities_url
+from apps.weather.models import Weather
+from apps.weather.weather_url import cities_url, base_url, weather_api_key
 
 
 @periodic_task(
