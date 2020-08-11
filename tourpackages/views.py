@@ -6,7 +6,7 @@ from rest_framework.status import HTTP_404_NOT_FOUND
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from . import models
-from . import serializers
+from . import serializers, available_serializers
 
 
 class ListTourPackages(generics.ListCreateAPIView):
@@ -19,12 +19,15 @@ class ListTourPackages(generics.ListCreateAPIView):
 class TourPackagesByDate(generics.ListAPIView):
     authentication_classes = (JWTAuthentication,)
     permission_classes = (IsAuthenticated,)
+    serializer_class = available_serializers.FilterAvailableDateSerializer
 
     def get_queryset(self):
-        first_date = self.kwargs['first_date']
-        last_date = self.kwargs['last_date']
+        print(self.request.GET)
+        first_date = self.request.GET['first_date']
+        last_date = self.request.GET['last_date']
 
-        return models.TourPackages.objects.filter(available_dates__date_available=first_date, available_dates=last_date)
+        result = models.AvailableDates.objects.filter(date_available__range=[first_date, last_date])
+        return result
 
 
 class RetrieveUpdateDeleteTourPackages(generics.RetrieveUpdateDestroyAPIView):

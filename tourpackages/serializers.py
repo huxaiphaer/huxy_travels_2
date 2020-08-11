@@ -20,6 +20,17 @@ class DestinationSerializer(serializers.ModelSerializer):
         read_only_fields = ('tour_package',)
 
 
+class BookingSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(required=False)
+
+    class Meta:
+        model = models.Booking
+        fields = (
+            'id',
+            'tour_package'
+        )
+
+
 class AvailableDatesSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(required=False)
 
@@ -32,17 +43,6 @@ class AvailableDatesSerializer(serializers.ModelSerializer):
 
         model = models.AvailableDates
         read_only_fields = ('tour_package',)
-
-
-class BookingSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(required=False)
-
-    class Meta:
-        model = models.Booking
-        fields = (
-            'id',
-            'tour_package'
-        )
 
 
 class TourPackageSerializer(serializers.ModelSerializer):
